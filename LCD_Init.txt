@@ -1,0 +1,62 @@
+/*--------------------------------------------------------------------------------------------------------------------
+        Function:         LCD_Init
+
+        Description:      Initialise LCD. Note that the LCD has a 4 bit hardware connection 
+
+													P3.7	BL	=> Backlight		
+													P3.6	E		=> Enable		
+													P3.5	R/W	=> Read/Write line		
+													P3.4	RS	=> Register Select		
+													P3.3	D7	=> Data line		
+													P3.2	D6	=> Data line		
+													P3.1	D5	=> Data line		
+													P3.0	D4	=> Data line															
+
+        Revisions:
+
+--------------------------------------------------------------------------------------------------------------------*/
+void LCD_Init()
+{
+	LCD = 0x00;
+
+	Xms_Delay(20);		// 	20ms delay
+	LCD = 0x03;				//	Function Set	
+	Toggle_E();				// 	Toggle the E line
+	Xms_Delay(5);			// 	5ms delay	
+
+	LCD = 0x03;				//	Function Set	
+	Toggle_E();				// 	Toggle the E line
+	Xms_Delay(2);			// 	1ms delay	
+
+	LCD = 0x03;				//	Function Set	
+	Toggle_E();				// 	Toggle the E line
+	Xms_Delay(2);			// 	1ms delay	
+
+	LCD = 0x02;				//	Function Set	
+	Toggle_E();				// 	Toggle the E line
+
+	LCD = 0x02;				//	Function Set	
+	Toggle_E();				
+	LCD = 0x08;				//	2 lines, 5x8 display	
+	Toggle_E();				
+
+	LCD = 0x00;				//	Display off	
+	Toggle_E();				
+	LCD = 0x08;					
+	Toggle_E();					
+
+	LCD = 0x00;				//	Display clear display	
+	Toggle_E();				
+	LCD = 0x01;					
+	Toggle_E();	
+
+	LCD = 0x00;				//	Cursor increment
+	Toggle_E();				
+	LCD = 0x06;					
+	Toggle_E();	
+	
+	LCD = 0x00;				//	Display on
+	Toggle_E();				
+	LCD = 0x0C;					
+	Toggle_E();					
+}
